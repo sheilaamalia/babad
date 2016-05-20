@@ -18,7 +18,7 @@
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
+    <!--<div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#"></a>
         </div>
@@ -28,26 +28,37 @@
             <li><a href="#Peralihan Kekuasaan">Masa Kejayaan</a></li>
             <li><a href="#Pasca Sultan Agung">Masa Keruntuhan</a></li>
         </ul>
+   </div>-->
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="#">HTML</a>
+            <ul><li><a href="#Silsilah">Silsilah</a></li></ul></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+        </ul>
     </div>
 </nav>
 
-<div class="container">
 
-    <div id='map'></div>
+<div class="container" >
+    <div id='map' class="col-sm-8"></div>
 
+    <div id='cover' class='cover active col-sm-4'>
+        <h2>Atlas Babad Tanah Jawi</h2>
+        <p>by Sheila Amalia Burhanudin</p>
+        <small class='scroll quiet'>Scroll &#x25BE;</small>
+    </div>
 
     <article id='narrative'>
-        <div class='sections prose'>
-            <section id='cover' class='cover active'>
-                <h2>Atlas Babad Tanah Jawi</h2>
-                <p>by Sheila Amalia Burhanudin</p>
-                <small class='scroll quiet'>Scroll &#x25BE;</small>
-            </section>
+        <div class='sections prose col-sm-4'>
+
 
             <!--Masa Pra Kekuasaan Mataram-->
             <section id='Silsilah'>
                 <h3>Silsilah Kerajaan Mataram</h3>
-                <img src="asset/01.jpg" height="400" width="450">
+                <img src="asset/01.jpg" class="fit">
                 <p align="justify">Kesultanan Mataram adalah kerajaan Islam di Pulau Jawa yang pernah berdiri pada abad
                     ke-17. Kerajaan ini dipimpin suatu dinasti keturunan Ki Ageng Sela dan Ki Ageng Pemanahan.
                     <br> Asal-usul dimulainya kekuasaan Kesultanan Mataram disebutkan bahwa berkaitan erat dengan
@@ -64,7 +75,7 @@
             </section>
             <section id='Ki Ageng Pemanahan'>
                 <h3>Sosok Ki Ageng Pemanahan dan Perjalanan Ki Ageng Pemanahan </h3>
-                <img src="asset/02.jpg" height="400" width="450">
+                <img src="asset/02.jpg" class="fit">
                 <p align="justify">Ki Ageng Pemanahan adalah sosok pembuka Tanah Alas Mentaok (Mataram) yang akan
                     menjadi daerah asal muasal
                     berdirinya Kesultanan Mataram. Ki Ageng Pemanahan merupakan cucu dari Ki Ageng Sela dan putra dari
@@ -86,7 +97,7 @@
             </section>
             <section id='Pemberontakan Arya'>
                 <h3>Peristiwa Pemberontakan Arya Penangsang</h3>
-                <img src="asset/03.jpg" height="400" width="450">
+                <img src="asset/03.jpg" class="fit">
                 <p align="justify">Perjalanan Ki Ageng Pemanahan dimulai dari peperangan melawan Arya Penangsang. Arya
                     Penangsang merupakan Raja
                     Jipang yang ingin menjadi penguasa Tanah Jawa. Guru spritual Arya Penangsang, Sunan Kudus, berkata
@@ -321,6 +332,10 @@
     </article>
 
     <script>
+     var tinggi= $('#cover').height()
+     console.log(tinggi)
+        $('#Silsilah').css('padding-top', tinggi+10)
+
         L.mapbox.accessToken = 'pk.eyJ1Ijoic2hlaWxhYW1hbGlhIiwiYSI6IkNiTmdlQ1kifQ.AQMh0TeJoFX1TyKDObxvxw';
 
         // Replace 'mapbox.streets' with your map id.
@@ -334,6 +349,13 @@
         // The important part about this data is that the 'id' property matches
         // the HTML above - that's how we figure out how to link up the
         // map and the data.
+        var poligon = L.mapbox.featureLayer('sheilaamalia.pn4knc8g');
+
+        // When the features are loaded, make sure
+        // the basemap display's the same geographical coordinates.
+        poligon.on('ready', function() {
+            map.fitBounds(poligon.getBounds());
+        });
         var places = {
             type: 'FeatureCollection', features: [
                 {
@@ -440,6 +462,12 @@
         var placesLayer = L.mapbox.featureLayer(places)
                 .addTo(map);
 
+         /*placesLayer.eachLayer(function (layer) {
+             var content = "tet";
+             layer.bindPopup(content)
+         });
+*/
+     console.log(placesLayer);
 
         var narrative = document.getElementById('narrative'),
                 sections = narrative.getElementsByTagName('section'),
@@ -447,33 +475,59 @@
 
         setId('cover');
 
+        var line_points = [[-7.57020308036945, 110.78510284423828], [-7.763382015212087, 110.50048828124999,],[-7.816786243917258, 110.45997619628906, ],[-7.818922576191321, 110.3979005724011,]];
+
+        var polyline_options = {
+            color: '#000'
+        };
+        var polyline1 = L.polyline(line_points, polyline_options);
+
         function setId(newId) {
 
             if (newId === currentId) return;
 
             placesLayer.eachLayer(function (layer) {
                 if (layer.feature.properties.id === newId) {
+                    map.addLayer(layer);
                     map.setView(layer.getLatLng(), layer.feature.properties.zoom || 14);
                     layer.setIcon(L.mapbox.marker.icon({
                         'marker-color': '#99d8c9'
                     }));
                 }
                 else {
-                    layer.setIcon(L.mapbox.marker.icon({
-                        'marker-color': '#404040'
-                    }));
+                    map.removeLayer(layer);
                 }
             });
 
-            // Here we load the features.json from another project
-            // to use with the map initialized above.
-            var features = L.mapbox.featureLayer('sheilaamalia.pn4knc8g').addTo(map);
 
-            // When the features are loaded, make sure
-            // the basemap display's the same geographical coordinates.
-            features.on('ready', function() {
-                map.fitBounds(features.getBounds());
-            });
+
+            if(newId=="Silsilah"){
+                map.addLayer(poligon);
+                map.removeLayer(polyline1)
+            }/*
+            else if(newId=="ekspansi"){
+                map.removeLayer(poligonSilsilah);
+                map.removeLayer(poligonX);
+                map.addLayer(poligonEkspansi);
+            }
+            else if(newId=="x"){
+                map.removeLayer(poligonSilsilah);
+                map.addLayer(poligonX);
+                map.removeLayer(poligonEkspansi);
+            }*/
+            else if (newId=="Perjalanan Ki Ageng Pemanahan"){
+                polyline1.addTo(map);
+            }
+            else{
+                map.removeLayer(poligon);
+
+                console.log(map.hasLayer(polyline1))
+                if(map.hasLayer(polyline1)){
+                    map.removeLayer(polyline1);
+                }
+            }
+            // Here we load the features.json from another project
+            // to use with the map initialized above
             /*var start = { x: 110.3979096553837, y: -7.818913543993155 };
             var end = { x: 111.52996466383171, y: -7.63684701124045 };
             var generator = new arc.GreatCircle(start, end, { name: 'coba' });
@@ -484,13 +538,7 @@
             var content = '<h2>'+ layer.feature.properties.title+'<\/h2>' + '<img src="'+ layer.feature.properties.image+'" alt="">';
             marker.bindPopup(content);
 */
-           /* myLayer.on('layeradd', function(e) {
-                var marker = e.layer,
-                        feature = marker.feature;
-                marker.setIcon(L.icon(feature.properties.icon));
-                var content = '<h2>'+ feature.properties.title+'<\/h2>' + '<img src="'+feature.properties.image+'" alt="">';
-                marker.bindPopup(content);
-            });*/
+
 
             /*open popup*/
             /*map.featureLayer.on('ready', function(e) {
@@ -534,7 +582,7 @@
                     newId = sections[i].id;
                 }
             }
-            ;
+
             setId(newId);
         };
         $(function () {

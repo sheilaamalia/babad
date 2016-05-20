@@ -1,7 +1,14 @@
 body { margin:0; padding:0; }
-#map { position: absolute; top:0; bottom:0; right:0; left:150; width:65%; }
+#map { position: absolute; top:0; bottom:0; right:0}
 
-
+.fit {
+    max-width: 100%;
+    max-height: 100%;
+}
+.dropdown {
+    float: right;
+    margin-top: 10px
+}
 article {
     position:absolute;
     top:30px;
@@ -18,8 +25,7 @@ article {
     text-align:center;
 }
 .sections {
-    background:rgba(255,255,255,0.5);
-    width:450px;
+    background:rgba(255,255,255,0.5)
 }
 
 section {
@@ -32,3 +38,16 @@ section.active {
     background:#fff;
     color:#404040;
 }
+#cover  {
+    position: fixed;
+    z-index: 5;
+    padding-left:0px;
+    left: 0px;
+    padding-top: 50px;
+    background-color: rgba(255,255,255,1) !important;
+    color:rgba(0,0,0,1);
+    -webkit-transition:background 500ms, color 500ms;
+    transition:background 500ms, color 500ms
+
+}
+
