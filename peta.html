@@ -72,14 +72,10 @@
                     <br> Asal-usul dimulainya kekuasaan Kesultanan Mataram disebutkan bahwa berkaitan erat dengan
                     Kesultanan Demak dan Kesultanan Pajang. Setelah Demak mengalami kemuduran, ibukotanya dipindahkan ke
                     Pajang.
-                    <br><a href="#" role="button" class="btn popovers" data-toggle="popover" data-trigger="focus"
-                           title="Silsilah Kerajaan Mataram"
-                           data-content="Kesultanan Mataram adalah kerajaan Islam di Pulau Jawa yang pernah berdiri pada abad ke-17. Kerajaan ini dipimpin suatu dinasti keturunan Ki Ageng Sela dan Ki Ageng Pemanahan.
-                            Asal-usul dimulainya kekuasaan Kesultanan Mataram disebutkan bahwa berkaitan erat dengan Kesultanan Demak dan Kesultanan Pajang. Setelah Demak mengalami kemuduran, ibukotanya dipindahkan ke Pajang. Kesultanan Pajang merupakan kerajaan besar di Jawa yang mempunyai beberapa daerah kekuasaan seperti:
-                            Pajang, Madiun, Mataram, Pati, Prawata (Demak), Kalinyamat (Jepara), dan Jipang (Bojonegoro).
-                            Silsilah tokoh pertama yang mengawali kekuasaan Kesultanan Mataram menurut Babad Tanah Djawi
-                            dinamakan Silsilah Tertua. Silsilah Tertua akan digambarkan dalam bagan sebagai berikut:">Read
-                        More..</a>
+                    <br>Kesultanan Pajang merupakan kerajaan besar di Jawa yang mempunyai beberapa daerah kekuasaan seperti:
+                    Pajang, Madiun, Mataram, Pati, Prawata (Demak), Kalinyamat (Jepara), dan Jipang (Bojonegoro).
+                    Silsilah tokoh pertama yang mengawali kekuasaan Kesultanan Mataram menurut Babad Tanah Djawi
+                    dinamakan Silsilah Tertua. Silsilah Tertua akan digambarkan dalam bagan sebagai berikut:</p>
             </section>
             <section id='Ki Ageng Pemanahan'>
                 <h3>Sosok Ki Ageng Pemanahan</h3>
@@ -339,17 +335,14 @@
         var map = L.map('map', {zoomControl: false, dragging: true})
                 .addLayer(mapboxTiles)
                 .setView([42.3610, -71.0587], 15);
-        // In this case, we just hardcode data into the file. This could be dynamic.
-        // The important part about this data is that the 'id' property matches
-        // the HTML above - that's how we figure out how to link up the
-        // map and the data.
+
+        // fungsi untuk menampilkan poligon dari project id Mapbox
         var poligon = L.mapbox.featureLayer('sheilaamalia.pn4knc8g');
 
-        // When the features are loaded, make sure
-        // the basemap display's the same geographical coordinates.
         poligon.on('ready', function() {
             map.fitBounds(poligon.getBounds());
         });
+
         var places = {
             type: 'FeatureCollection', features: [
                 {
@@ -438,7 +431,7 @@
                 },
                 /*Penaklukan Suarabaya*/
                 {
-                    geometry: {type: "Point", coordinates: [-0.12416858, 51.50779757]},
+                    geometry: {type: "Point", coordinates: [110.3975624357421, -7.822878865197143]},
                     properties: {id: "Penaklukan Surabaya"}, type: 'Feature'
                 },
 
@@ -490,12 +483,12 @@
         var placesLayer = L.mapbox.featureLayer(places)
                 .addTo(map);
 
-         placesLayer.eachLayer(function (layer) {
-             var content = "tet";
+    /*     placesLayer.eachLayer(function (layer) {
+             var content = (layer.feature.properties.title);
              console.log(layer);
              layer.bindPopup(content).openPopup();
          });
-     console.log(placesLayer);
+     console.log(placesLayer);*/
 
         var narrative = document.getElementById('narrative'),
                 sections = narrative.getElementsByTagName('section'),
@@ -518,9 +511,11 @@
                 if (layer.feature.properties.id === newId) {
                     map.addLayer(layer);
                     map.setView(layer.getLatLng(), layer.feature.properties.zoom || 14);
+                   /* layer.bindPopup(content);*/
                     layer.setIcon(L.mapbox.marker.icon({
                         'marker-color': '#99d8c9'
                     }));
+
                 }
                 else {
                     map.removeLayer(layer);
@@ -584,25 +579,22 @@
             }*/
             /*open popup*/
 
-            // highlight the current section
+            // fungsi untuk highlight section yg sedang aktif (current section)
             for (var i = 0; i < sections.length; i++) {
                 sections[i].className = sections[i].id === newId ? 'active' : '';
             }
-            // And then set the new id as the current one,
-            // so that we know to do nothing at the beginning
-            // of this function if it hasn't changed between calls
+
+            // set id yang sedang aktif sebagai current id
             currentId = newId;
         }
 
-        // If you were to do this for real, you would want to use
-        // something like underscore's _.debounce function to prevent this
-        // call from firing constantly.
+
+        // fungsi scrolling pada narasi
         narrative.onscroll = function (e) {
             var narrativeHeight = narrative.offsetHeight;
             var newId = currentId;
-            // Find the section that's currently scrolled-to.
-            // We iterate backwards here so that we find the topmost one.
 
+            // Fungsi untuk mencari section yang sekarang sedang di-scroll dengan fungsi iterasi
             /*section akan berpindah menjadi id baru apabila telah melewati batas panjang section sebelumnya*/
             for (var i = sections.length - 1; i >= 0; i--) {
                 var rect = sections[i].getBoundingClientRect();
