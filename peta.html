@@ -12,6 +12,7 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
     <script src='http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js'></script>
     <script src='js/mapbox.js'></script>
+    <script src='asset/perjalanan2.geojson'></script>
     <link href='css/mapbox.css' rel='stylesheet'/>
 
     <!--link external css dan javascript-->
@@ -553,8 +554,15 @@
         var polyline_options = {
             color: '#000'
         };
+
         var polyline1 = L.polyline(line_points, polyline_options);
 
+        var jalan = L.marker([polyline1._latlngs[0].lat, polyline1._latlngs[0].lng], {
+            icon: L.mapbox.marker.icon({
+                'marker-color': '#f86767',
+                'zIndexOffset':'5000'
+            })
+        })
 //        function getPoint(start, end, tambah) {
 //
 //            var m = (end[0]-start[0])/(end[1]-start[1]);
@@ -569,8 +577,20 @@
 //            }
 //        }
 
-        var perjalanan = L.mapbox.featureLayer()
-                .loadURL('asset/perjalanan.geojson')
+//        var perjalanan = L.mapbox.featureLayer()
+//                .loadURL('https://raw.githubusercontent.com/sheilaamalia/sheilaamalia.github.io/master/asset/perjalanan2.geojson').addTo(map)
+
+        var coords = []
+        L.geoJson(perjalanan, {
+            style: function (feature) {
+                return {color: feature.properties.color};
+            },
+            onEachFeature: function (feature, layer) {
+                console.log(feature.geometry.coordinates);
+                coords.push({lat:feature.geometry.coordinates[1],lng:feature.geometry.coordinates[0]})
+            }
+        })
+
 
         function setId(newId) {
 
@@ -606,35 +626,33 @@
              map.removeLayer(poligonEkspansi);
              }*/
             else if (newId == "Perjalanan Ki Ageng Pemanahan") {
-                console.log(polyline1._latlngs)
                 polyline1.addTo(map);
                 var j = 0;
                 var track = [];
                 // Create a marker and add it to the map.
-                var marker = L.marker([polyline1._latlngs[0].lat, polyline1._latlngs[0].lng], {
-                    icon: L.mapbox.marker.icon({
-                        'marker-color': '#f86767'
-                    })
-                }).addTo(map);
+                jalan.addTo(map);
 //                getPoint([polyline1._latlngs[0].lat,polyline1._latlngs[0].lng],[polyline1._latlngs[1].lat,polyline1._latlngs[1].lng], 0.001);
 
                 tick();
                 function tick() {
                     // Set the marker to be at the same point as one
                     // of the segments or the line.
-                    marker.setLatLng(L.latLng(
-                            perjalanan.coordinates[j][1],
-                            perjalanan.coordinates[j][0]));
+                    jalan.setLatLng(L.latLng(
+                            coords[j].lat,
+                            coords[j].lng));
 
                     // Move to the next point of the line
                     // until `j` reaches the length of the array.
-                    if (++j < polyline1._latlngs.length) setTimeout(tick, 500);
-                }            }
+                    if (++j < coords.length) setTimeout(tick, 100);
+                }
+        }
             else {
                 map.removeLayer(poligon);
-
                 if (map.hasLayer(polyline1)) {
                     map.removeLayer(polyline1);
+                }
+                if (map.hasLayer(jalan)) {
+                    map.removeLayer(jalan);
                 }
             }
             // Here we load the features.json from another project
