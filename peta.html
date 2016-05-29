@@ -10,322 +10,381 @@
     <meta charset=utf-8/>
     <title>Atlas Babad Tanah Jawi</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
+    <script src='http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js'></script>
     <script src='js/mapbox.js'></script>
     <link href='css/mapbox.css' rel='stylesheet'/>
 
     <!--link external css dan javascript-->
     <link rel="stylesheet" type="text/css" href="css/babad.css">
+
+    <style>
+        #wrap{
+            padding:0px;
+            margin:0px;
+            width:100%;
+            overflow: hidden;
+        }
+        #map{
+            position: fixed;
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-   <!-- <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#"></a>
-        </div>-->
-       <!-- <a class="navbar-logo" href="index.html"><img src="images/logo_ugm.gif" alt="logo"></a>-->
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Beranda</a></li>
-            <!--<li><a href="#Silsilah">Masa Pra</a></li>
-            <li><a href="#Peralihan Kekuasaan">Masa Kejayaan</a></li>
-            <li><a href="#Pasca Sultan Agung">Masa Keruntuhan</a></li>-->
-        </ul>
-   </div>
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Daftar Isi
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li><a href="#"><strong>Masa Pra Kekuasaan</strong></a>
-            <ul><li><a href="#Silsilah">Silsilah Kerajaan Mataram</a></li></ul></li>
-            <ul><li><a href="#Ki Ageng Pemanahan">Sosok Ki Ageng Pemanahan</a></li></ul></li>
-            <ul><li><a href="#Pemberontakan Arya">Peristiwa Pemberontakan Arya Penangsang</a></li></ul></li>
-            <ul><li><a href="#Perjalanan Ki Ageng Pemanahan">Pembukaan Tanah Alas Mentaok</a></li></ul></li>
-            <ul><li><a href="#Panembahan Senopati">Masa Kekuasaan Panembahan Senopati</a></li></ul></li>
-            <li><a href="#"><strong>Masa Keemasan</strong></a></li>
-            <ul><li><a href="#Sultan Agung">Masa Kekuasaan Sultan Agung</a></li></ul></li>
-            <ul><li><a href="#Ekspansi Wilayah">Ekspansi Wilayah Kerajaan Mataram</a></li></ul></li>
-            <ul><li><a href="#Penaklukan Surabaya">Penaklukan Surabaya dan Madura</a></li></ul></li>
-            <li><a href="#"><strong>Masa Perpecahan</strong></a></li>
-            <ul><li><a href="#Pasca Sultan Agung">Pasca Kekuasaan Sultan Agung</a></li></ul></li>
-            <ul><li><a href="#Perpecahan">Perpecahan Mataram</a></li></ul></li>
-        </ul>
-    </div>
-</nav>
-
-
-<div class="container" >
-    <div id='map' class="col-sm-8"></div>
-
-    <div id='cover' class='cover active col-sm-4'>
-        <h2>Atlas Babad Tanah Jawi</h2>
-        <p>by Sheila Amalia Burhanudin</p>
-        <small class='scroll quiet'>Scroll &#x25BE;</small>
-    </div>
-
-    <article id='narrative'>
-        <div class='sections prose col-sm-4'>
-            <!--Masa Pra Kekuasaan Mataram-->
-            <section id='Silsilah'>
-                <h3>Silsilah Kerajaan Mataram</h3>
-                <img src="asset/01.jpg" class="fit">
-                <p align="justify">Kesultanan Mataram adalah kerajaan Islam di Pulau Jawa yang pernah berdiri pada abad
-                    ke-17. Kerajaan ini dipimpin suatu dinasti keturunan Ki Ageng Sela dan Ki Ageng Pemanahan.
-                    <br> Asal-usul dimulainya kekuasaan Kesultanan Mataram disebutkan bahwa berkaitan erat dengan
-                    Kesultanan Demak dan Kesultanan Pajang. Setelah Demak mengalami kemuduran, ibukotanya dipindahkan ke
-                    Pajang.
-                    <br>Kesultanan Pajang merupakan kerajaan besar di Jawa yang mempunyai beberapa daerah kekuasaan seperti:
-                    Pajang, Madiun, Mataram, Pati, Prawata (Demak), Kalinyamat (Jepara), dan Jipang (Bojonegoro).
-                    Silsilah tokoh pertama yang mengawali kekuasaan Kesultanan Mataram menurut Babad Tanah Djawi
-                    dinamakan Silsilah Tertua. Silsilah Tertua akan digambarkan dalam bagan sebagai berikut:</p>
-            </section>
-            <section id='Ki Ageng Pemanahan'>
-                <h3>Sosok Ki Ageng Pemanahan</h3>
-                <img src="asset/02.jpg" class="fit">
-                <p align="justify">Ki Ageng Pemanahan adalah sosok pembuka Tanah Alas Mentaok (Mataram) yang akan
-                    menjadi daerah asal muasal
-                    berdirinya Kesultanan Mataram. Ki Ageng Pemanahan merupakan cucu dari Ki Ageng Sela dan putra dari
-                    Ki Ageng
-                    Ngenis. Ki Gede Pemanahan diberi nama sesuai dengan daerah yang dikuasakan kepadanya oleh Sultan
-                    Hadiwijaya
-                    pada saat itu. Daerah itu bernama Manahan, suatu daerah di sebelah barat Solo. Nama sebenarnya Ki
-                    Gede
-                    Pemanahan tidak disebutkan dalam Babad Tanah Djawi. Dari Sadjarah Dalem (Padmasoesastra, 1912) juga
-                    dari Van
-                    der Horst (1707) pernah disebutkan sebuah nama kecil yaitu Bagus Kacung</p>
-                <p align="justify">Ki Ageng Pemanahan bersama dengan saudaranya, Ki Panjawi, mengabdi kepada Sultan
-                    Hadiwijaya yang saat itu
-                    merupakan Raja dari Kerajaan Pajang. Mereka memiliki paman bernama Ki Juru Martani sebagai penasehat
-                    yang
-                    bijaksana. Ketiga tokoh ini memiliki hubungan yang sangat erat dan merupakan orang-orang kepercayaan
-                    Sultan
-                    Hadiwijaya.</p>
-            </section>
-            <section id='Pemberontakan Arya'>
-                <h3>Peristiwa Pemberontakan Arya Penangsang</h3>
-                <img src="asset/03.jpg" class="fit">
-                <p align="justify">Perjalanan Ki Ageng Pemanahan dimulai dari peperangan melawan Arya Penangsang. Arya
-                    Penangsang merupakan Raja
-                    Jipang yang ingin menjadi penguasa Tanah Jawa. Guru spritual Arya Penangsang, Sunan Kudus, berkata
-                    bahwa untuk
-                    menjadi penguasa Tanah Jawa harus menumpaskan Sultan Hadiwijaya. Arya Penangsang pun mencoba
-                    membunuh Sultan
-                    Hadiwijaya dengan mengirimkan utusan namun tidak berhasil. Arya Penangsang pun berniat akan membunuh
-                    Sultan
-                    Hadiwijaya dengan tangannya sendiri.</p>
-                <p align="justify">Sultan Hadiwijaya yang mengetahui rencana Arya Penangsang pun membuat sayembara dan
-                    berjanji kepada Ki Ageng
-                    Pemanahan dan Ki Panjawi jika keduanya berhasil meredakan pemberontakan Arya Penangsang maka akan
-                    mendapatkan
-                    hadiah tanah Pati dan Alas Mentaok (Mataram). Sultan Hadiwijaya memilih tidak memerangi Arya
-                    Penangsang
-                    sendiri karena masih bersaudara dan merupakan bagian dari keluarga besar Kesultanan Demak. Ki Ageng
-                    Pemanahan
-                    dan Ki Panjawi pun menyanggupi dan bersedia mengikuti sayembara tersebut atas nasehat Ki Martani,
-                    paman
-                    sekaligus penasehat kerajaan Pajang. Perang terjadi di tepian Sungai Caket (Bengawan Solo). Perang
-                    ini
-                    dimenangkan oleh Ki Gede Pemanahan dan Ki Panjawi (cerita mendetil dapat dibaca dalam Babad
-                    Pakualaman).</p>
-            </section>
-            <section id='Perjalanan Ki Ageng Pemanahan'>
-                <h3>Pembukaan Tanah Alas Mentaok (Awal berdirinya Kerajaan Mataram)</h3>
-                <img src="asset/05.jpg" class="fit">
-                <p align="justify">Sultan Hadiwijaya harus menepati janjinya yaitu memberikan tanah Pati dan Alas
-                    Mentaok kepada Ki Ageng
-                    Pemanahan dan Ki Panjawi. Namun, Sultan Hadiwijaya tidak langsung memberikan tanah tersebut karena
-                    khawatir
-                    dengan ramalan yang dikeluarkan oleh Sunan Giri bahwa Mataram kelak akan menjadi kerajaan yang besar
-                    yang
-                    melebihi kebesaran Kerajaan Pajang. Hal tersebut membuat Sultan Hadiwijaya resah dan terus menunda
-                    memberikan
-                    tanah tersebut kepada Ki Ageng Pemanahan dan Ki Panjawi. Mengetahui kondisi tersebut, Sunan Kalijaga
-                    yang juga
-                    merupakan guru dari Sultan Hadiwijaya menjadi penengah dalam permasalahan tersebut. Sunan Kalijaga
-                    meminta
-                    Sultan Hadwijaya untuk memberikan tanah tersebut dengan alasan takdir tidak dapat direkayasa dan
-                    membuat Ki
-                    Ageng Pemanahan bersumpah akan setia kepada Sultan Hadiwijaya. Sultan Hadiwijaya akhirnya
-                    menyerahkan tanah
-                    Pati dan Alas Mentaok pada tahun 1556.</p>
-                <p align="justify">Pada saat itu Alas Mentaok adalah hutan belantara bekas lokasi kerajaan pada masa
-                    lalu yang sudah lama
-                    ditinggalkan sedangkan Pati sudah menjadi kota dengan penduduk yang maju. Karena Ki Ageng Pemanahan
-                    menghormati kakaknya, ia pun menawarkan Ki Panjawi untuk memilih Pati atau Alas Mentaok sebagai
-                    tanahnya. Ki
-                    Panjawi memilih Pati yang makmur dan Ki Ageng Pemanahan menerima tanah Alas Mentaok (Mataram) untuk
-                    dirinya.
-                    Setelah mendapatkan hadiah tanah Alas Mentaok (Mataram), Ki Ageng Pemanahan harus merambah hutan
-                    belantara
-                    untuk membuka daerah tersebut dan menjadikannya kota baru. Ia ditemani oleh Ki Juru Martani beserta
-                    keluarga
-                    dan pengikutnya pun berangkat dari Kerajaan Pajang ke Alas Mentaok (Mataram).</p>
-                <p align="justify">Sedikit demi sedikit Alas Mentaok mulai memiliki penduduk yang mengisi daerah
-                    tersebut dan Ki Ageng Pemanahan
-                    mulai mendirikan istananya di atas tanah desa yang dipimpinnya (sekarang berlokasi di daerah
-                    Kotagede, DI
-                    Yogyakarta). Ki Ageng Pemanahan diberi gelar Ki Ageng Mataram. Ki Ageng Mataram wafat pada tahun
-                    1584 dan
-                    digantikan oleh putranya yang bernama Sutawijaya atau lebih dikenal dengan nama Panembahan
-                    Senopati.</p>
-            </section>
-            <section id='Panembahan Senopati'>
-                <h3>Masa Kekuasaan Panembahan Senopati</h3>
-                <img src="asset/07.jpg" class="fit">
-                <p align="justify">Setelah Ki Ageng Mataram wafat, kekuasaan berpindah kepada putranya yang bernama
-                    Sutawijaya. Sutawijaya yang
-                    bergelar “Mas Ngabehi Loring Pasar” merupakan anak angkat Sultan Hadiwijaya, lalu diangkat oleh
-                    Sultan sebagai
-                    penguasa di wilayah Mataram menggantikan Ki Ageng Mataram. Sutawijaya bercita-cita untuk menguasai
-                    Jawa dan
-                    berusaha mewujudkan keinginannya dengan mulai mengumpulkan pengikut dari berbagai daerah.</p>
-                <p align="justify">Karena keinginannya menguasai Jawa, Sutawijaya tidak mau berkunjung ke Pajang dan
-                    menghadap kepada Sultan
-                    Hadiwijaya sesuai dengan kewajibannya. Keadaan ini dikarenakan ia merasa telah memiliki Tanah
-                    Mataram yang
-                    semakin makmur. Sutawijaya dianggap melawan dan memberontak kepada Kerajaan Pajang. Hal ini membuat
-                    Sultan
-                    Hadiwijaya marah yang kemudian menyerang Mataram. Penyerangan ini akhirnya menimbulkan perang di
-                    antara
-                    Kerajaan Pajang dan Mataram pada tahun 1587. Perang ini terjadi di Randulawang, yaitu daerah sekitar
-                    Prambanan. Pasukan Pajang dapat dipukul mundur meskipun jumlah mereka jauh lebih banyak. Sultan
-                    Hadiwijaya
-                    jatuh sakit dalam perjalanan pulang ke Pajang. Ia akhirnya meninggal dunia namun sebelumnya sempat
-                    berwasiat
-                    agar anak-anaknya jangan ada yang membenci Senapati serta harus tetap memperlakukannya sebagai kakak
-                    sulung.
-                    Senapati sendiri ikut hadir dalam pemakaman ayah angkatnya itu.</p>
-            </section>
-            <section id="Perang">
-                <b><i><h5>Perkembangan Kekuasaan Kesultanan Mataram</h5></i></b>
-                <img src="asset/06.jpg" class="fit">
-                <p align="justify">Pada tahun 1588, Mataram mulai berkembang menjadi kerajaan dengan Sutawijaya sebagai
-                    raja pertamanya yang
-                    bergelar Panembahan Senopati. Kerajaan Pajang yang sedang dipimpin oleh dan Pangeran Banowo
-                    berwasiat untuk
-                    menggabungkan Pajang dan Mataram. Kemudian, Pajang menjadi bawahan Mataram pada tahun 1590.</p>
-                <p align="justify">Tahun-tahun berikutnya, Panembahan Senopati banyak melakukan penaklukan ke daerah
-                    timur Jawa, hingga akhirnya
-                    wilayah-wilayah penting seperti Jepara, Madiun, Kediri, Bojonegoro, dan sebagian Surabaya berada
-                    dibawah
-                    kekuasaan Mataram. Pada masa kekuasaannya, Panembahan Senopati telah membuat Mataram yang tadinya
-                    hanya berupa
-                    pemukiman kecil di pedalaman hingga menjadi kerajaan yang memiliki wilayah kekuasaan yang luas
-                    meliputi daerah
-                    di Jawa Tengah dan Jawa Timur.</p>
-            </section>
-
-            <!-- Masa Puncak Keemasan Mataram-->
-            <section id='Sultan Agung'>
-                <h3>Masa Kekuasaan Sultan Agung</h3>
-                <img src="asset/08.jpg" class="fit">
-                <p align="justify">Pada tahun 1601 Panembahan Senopati wafat dan digantikan oleh putranya, Mas Jolang
-                    yang bergelar Panembahan
-                    Hanyokrowati setelah dilantik menjadi Raja Mataram. Masa kekuasaan Panembahan Hanyokrowati hanya
-                    sebentar
-                    karena kecelakaan saat berburu di hutan Krapyak yang merenggut nyawanya pada tahun 1613. Oleh karena
-                    itu,
-                    kemudian ia dikenal sebagai Panembahan Seda Ing Krapyak yang artinya raja yang meninggal di
-                    Krapyak.</p>
-                <p align="justify">Panembahan Hanyokrowati kemudian digantikan oleh putra bungsunya yaitu Adipati
-                    Martapura. Kekuasaan Adipati
-                    Martapura hanya sebentar lalu digantikan oleh kakak sulungnya (beda ibu) yang bernama Mas Rangsang.
-                    Sebenarnya
-                    secara teknis Raden Mas Rangsang adalah Sultan ke-empat Kesultanan Mataram, namun secara umum
-                    dianggap sebagai
-                    Sultan ketiga karena adiknya yang sakit diangkat sebagai raja hanya sebagai pemenuhan janji
-                    ayahnya.</p>
-                <p align="justify">Raden Mas Rangsang naik takhta pada tahun 1613 dalam usia 20 tahun menggantikan
-                    Adipati Martapura, yang hanya
-                    menjadi Sultan Mataram selama satu hari. Sesudah naik tahta Mas Rangsang mendapat gelar Sultan Agung
-                    Prabu
-                    Hanyokrokusumo atau lebih dikenal dengan sebutan Sultan Agung. Pada masa kekuasaan Sultan Agung
-                    Kerajaan
-                    Mataram sampai pada puncak kejayaannya. Ibu kota Mataram saat itu masih berada di Kota Gede. Pada
-                    tahun 1614
-                    mulai dibangun istana baru di desa Karta, sekitar 5 km di sebelah barat daya Kota Gede, yang kelak
-                    mulai
-                    ditempati pada tahun 1618. Sultan Agung mewujudkan dan mempertahankan kejayaan melalui upaya
-                    militer,
-                    administrasi negara yang baik, kebudayaan, agama dan kepercayaan serta penggunaan media.</p>
-            </section>
-            <section id='Ekspansi Wilayah'>
-                <h3>Ekspansi wilayah Kerajaan Mataram</h3>
-                <img src="asset/09.jpg" class="fit">
-                <p align="justify">Dalam pemerintahannya, Sultan Agung banyak melakukan ekspansi ke beberapa wilayah di Jawa dalam rangka perluasan wilayah kerajaan Mataram. Ia melanjutkan perjuangan Mataram untuk menyatukan Pulau Jawa dengan melakukan penaklukan wilayah menggunakan taktik penyerangan secara militer maupun politik. Keberhasilan besar Kesultanan Mataram yaitu dalam menaklukan daerah di timur Jawa, yaitu menaklukan Surabaya. Sultan Agung belajar dari ayah dan kakeknya yang gagal dalam penyerangan terhadap Surabaya. Ia tidak serta merta menyerang Surabaya dengan membawa pasukan yang banyak karena ia tahu bahwa Surabaya mempunyai sekutu yang siap membantu dalam mempertahankan daerah kekuasaannya. Selain itu, Kota Surabaya memiliki pertahanan yang sangat kuat.</p>
-                <p align="justify">Sultan Agung menyadari hal itu sehingga dalam rangka menaklukkan Surabaya ia tidak langsung menyerang pusat kota, namun ia terlebih dahulu menguasai daerah-daerah bawahan yang menjadi pemasok bahan makanan ke pusat kota Surabaya. Beberapa daerah yang berhasil ditaklukan adalah Wirasaba (1615), Lasem (1616), Pasuruan (1617), dan Tuban (1619).</p>
-            </section>
-            <section id="Penaklukan Surabaya">
-                <h3>Penaklukan Surabaya dan Madura(1620-1625)</h3>
-                <p>Penaklukan terhadap kota Surabaya dilakukan selama bertahun-tahun. Serangan-serangan dan dan strategi perang dilakukan oleh Sultan Agung dan pasukannya untuk menaklukan Surabaya.</p>
-                <p>Penaklukan terhadap kota Surabaya dilakukan selama bertahun-tahun. Serangan-serangan dan dan strategi perang dilakukan oleh Sultan Agung dan pasukannya untuk menaklukan Surabaya.</p>
-            </section>
-
-            <!--Masa Perpecahan dan Keruntuhan Mataram-->
-            <section id='Pasca Sultan Agung'>
-                <h3>Pasca Kekuasaan Sultan Agung</h3>
-                <p align="justify">Pada tahun 1645 Sultan Agung wafat dan dimakamkan di Imogiri, ia digantikan oleh
-                    putranya yg bergelar
-                    Amangkurat (Amangkurat I). Amangkurat I memindahkan lokasi keraton ke Pleret (1647), tidak jauh dari
-                    Kerta.
-                    Selain itu, ia tidak lagi
-                    menggunakan gelar sultan, melainkan "sunan" (dari "Susuhunan" atau "Yang Dipertuan"). Pemerintahan
-                    Amangkurat
-                    I kurang stabil karena banyak ketidakpuasan dan pemberontakan. Pada masanya, terjadi pemberontakan
-                    besar yang
-                    dipimpin oleh Trunajaya dan memaksa Amangkurat bersekutu dengan VOC. Ia wafat di Tegalarum (1677)
-                    ketika
-                    mengungsi sehingga dijuluki Sunan Tegalarum. Penggantinya, Amangkurat II (Amangkurat Amral), sangat
-                    patuh pada
-                    VOC sehingga kalangan istana banyak yang tidak puas dan pemberontakan terus terjadi. Pada masanya,
-                    kraton
-                    dipindahkan lagi ke Kartasura (1680), sekitar 5km sebelah barat Pajang karena kraton yang lama
-                    dianggap telah
-                    tercemar.</p>
-                <p align="justify">Pengganti Amangkurat II berturut-turut adalah Amangkurat III (1703-1708), Pakubuwana
-                    I (1704-1719),
-                    Amangkurat IV (1719-1726), Pakubuwana II (1726-1749). VOC tidak menyukai Amangkurat III karena
-                    menentang VOC
-                    sehingga VOC mengangkat Pakubuwana I (Puger) sebagai raja. Akibatnya Mataram memiliki dua raja dan
-                    ini
-                    menyebabkan perpecahan internal. Amangkurat III memberontak dan menjadi "king in exile" hingga
-                    tertangkap di
-                    Batavia lalu dibuang ke Ceylon.</p>
-            </section>
-            <section id='Perpecahan'>
-                <h3>Perpecahan Mataram</h3>
-                <img src="asset/10.jpg" class="fit">
-                <p align="justify">Kekacauan politik baru dapat diselesaikan pada masa Pakubuwana III setelah pembagian
-                    wilayah Mataram menjadi
-                    dua yaitu Kesultanan Ngayogyakarta dan Kasunanan Surakarta tanggal 13 Februari 1755. Pembagian
-                    wilayah ini
-                    tertuang dalam Perjanjian Giyanti (nama diambil dari lokasi penandatanganan, di sebelah timur kota
-                    Karanganyar, Jawa Tengah). Berakhirlah era Mataram sebagai satu kesatuan politik dan wilayah.
-                    Walaupun
-                    demikian sebagian masyarakat Jawa beranggapan bahwa Kesultanan Yogyakarta dan Kasunanan Surakarta
-                    adalah "ahli
-                    waris" dari Kesultanan Mataram. Kesultanan Yogyakarta diperintah oleh Raja Mangkubumi yang diberi
-                    gelar
-                    Hamengkubuwono I, sedangkan Kasuhunan Surakarta diperintah oleh Susuhunan Pakubuwono II.</p>
-                <p align="justify">Pada tahun 1757, berdasarkan Perjanjian Salatiga, Kerajaan Mataram dibagi menjadi
-                    tiga, yaitu Kesultanan
-                    Yogyakarta, Kasunanan Surakarta dan Mangkunegaran. Daerah Mangkunegaran diperintah oleh Mas Said
-                    yang diberi
-                    gelar Pangeran Adipati Arya Mangkunegaran.
-                    <br>Pada tahun 1813 Kesultanan Yogyakarta dibagi menjadi dua kerajaan, yaitu kesultanan Yogyakarta
-                    dan
-                    Kerajaan Pakualaman, yang diperintah oleh Paku Alam yang semula adalah Adipati Kesultanan
-                    Yogyakarta. Dengan
-                    demikian Kerajaan Mataram dibagi menjadi empat kerajaan kecil, yaitu Kesultanan Yogyakarta,
-                    Kasunanan
-                    Surakarta, Kerajaan Mangkunegaran dan Kerajaan Pakualaman.</p>
-            </section>
+    <div id="wrap" class="container">
+        <div id="navigasi" class="row">
+            <nav class="navbar navbar-inverse navbar-fixed-top col-md-12">
+                <!-- <div class="container-fluid">
+                     <div class="navbar-header">
+                         <a class="navbar-brand" href="#"></a>
+                     </div>-->
+                <!-- <a class="navbar-logo" href="index.html"><img src="images/logo_ugm.gif" alt="logo"></a>-->
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.html">Beranda</a></li>
+                    <!--<li><a href="#Silsilah">Masa Pra</a></li>
+                    <li><a href="#Peralihan Kekuasaan">Masa Kejayaan</a></li>
+                    <li><a href="#Pasca Sultan Agung">Masa Keruntuhan</a></li>-->
+                </ul>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Daftar Isi
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><strong>Masa Pra Kekuasaan</strong></a>
+                            <ul>
+                                <li><a href="#1">Silsilah Kerajaan Mataram</a></li>
+                            </ul>
+                        </li>
+                        <ul>
+                            <li><a href="#2">Sosok Ki Ageng Pemanahan</a></li>
+                        </ul>
+                        </li>
+                        <ul>
+                            <li><a href="#3">Peristiwa Pemberontakan Arya Penangsang</a></li>
+                        </ul>
+                        </li>
+                        <ul>
+                            <li><a href="#Perjalanan Ki Ageng Pemanahan">Pembukaan Tanah Alas Mentaok</a></li>
+                        </ul>
+                        </li>
+                        <ul>
+                            <li><a href="#Panembahan Senopati">Masa Kekuasaan Panembahan Senopati</a></li>
+                        </ul>
+                        </li>
+                        <li><a href="#"><strong>Masa Keemasan</strong></a></li>
+                        <ul>
+                            <li><a href="#Sultan Agung">Masa Kekuasaan Sultan Agung</a></li>
+                        </ul>
+                        </li>
+                        <ul>
+                            <li><a href="#Ekspansi Wilayah">Ekspansi Wilayah Kerajaan Mataram</a></li>
+                        </ul>
+                        </li>
+                        <ul>
+                            <li><a href="#Penaklukan Surabaya">Penaklukan Surabaya dan Madura</a></li>
+                        </ul>
+                        </li>
+                        <li><a href="#"><strong>Masa Perpecahan</strong></a></li>
+                        <ul>
+                            <li><a href="#Pasca Sultan Agung">Pasca Kekuasaan Sultan Agung</a></li>
+                        </ul>
+                        </li>
+                        <ul>
+                            <li><a href="#Perpecahan">Perpecahan Mataram</a></li>
+                        </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-    </article>
+        <div id="content" class="row">
+            <div id='cover' class='cover active col-md-4'>
+                <center><h1>Atlas Babad Tanah Jawi</h1></center>
+                <center><strong>Periode Kesultanan Mataram Islam</strong></p></center>
+                <small class='scroll quiet'>Scroll &#x25BE;</small>
+            </div>
+            <div id="narasi" class="col-md-4">
+                <article id='narrative'>
+                    <div class='sections prose'>
+                        <!--Masa Pra Kekuasaan Mataram-->
+                        <a class="anchor" id="1"></a>
+                        <section id='Silsilah'>
+                            <h3>Silsilah Kerajaan Mataram</h3>
+                            <img src="asset/01.jpg" class="fit">
+                            <p align="justify">Kesultanan Mataram adalah kerajaan Islam di Pulau Jawa yang pernah berdiri pada abad
+                                ke-17. Kerajaan ini dipimpin suatu dinasti keturunan Ki Ageng Sela dan Ki Ageng Pemanahan.
+                                <br> Asal-usul dimulainya kekuasaan Kesultanan Mataram disebutkan bahwa berkaitan erat dengan
+                                Kesultanan Demak dan Kesultanan Pajang. Setelah Demak mengalami kemuduran, ibukotanya dipindahkan ke
+                                Pajang.
+                                <br>Kesultanan Pajang merupakan kerajaan besar di Jawa yang mempunyai beberapa daerah kekuasaan
+                                seperti:
+                                Pajang, Madiun, Mataram, Pati, Prawata (Demak), Kalinyamat (Jepara), dan Jipang (Bojonegoro).
+                                Silsilah tokoh pertama yang mengawali kekuasaan Kesultanan Mataram menurut Babad Tanah Djawi
+                                dinamakan Silsilah Tertua. Silsilah Tertua akan digambarkan dalam bagan sebagai berikut:</p>
+                        </section>
+                        <a class="anchor" id="2"></a>
+                        <section id='Ki Ageng Pemanahan'>
+                            <h3>Sosok Ki Ageng Pemanahan</h3>
+                            <img src="asset/02.jpg" class="fit">
+                            <p align="justify">Ki Ageng Pemanahan adalah sosok pembuka Tanah Alas Mentaok (Mataram) yang akan
+                                menjadi daerah asal muasal
+                                berdirinya Kesultanan Mataram. Ki Ageng Pemanahan merupakan cucu dari Ki Ageng Sela dan putra dari
+                                Ki Ageng
+                                Ngenis. Ki Gede Pemanahan diberi nama sesuai dengan daerah yang dikuasakan kepadanya oleh Sultan
+                                Hadiwijaya
+                                pada saat itu. Daerah itu bernama Manahan, suatu daerah di sebelah barat Solo. Nama sebenarnya Ki
+                                Gede
+                                Pemanahan tidak disebutkan dalam Babad Tanah Djawi. Dari Sadjarah Dalem (Padmasoesastra, 1912) juga
+                                dari Van
+                                der Horst (1707) pernah disebutkan sebuah nama kecil yaitu Bagus Kacung</p>
+                            <p align="justify">Ki Ageng Pemanahan bersama dengan saudaranya, Ki Panjawi, mengabdi kepada Sultan
+                                Hadiwijaya yang saat itu
+                                merupakan Raja dari Kerajaan Pajang. Mereka memiliki paman bernama Ki Juru Martani sebagai penasehat
+                                yang
+                                bijaksana. Ketiga tokoh ini memiliki hubungan yang sangat erat dan merupakan orang-orang kepercayaan
+                                Sultan
+                                Hadiwijaya.</p>
+                        </section>
+                        <a class="anchor" id="3"></a>
+                        <section id='Pemberontakan Arya'>
+                            <h3>Peristiwa Pemberontakan Arya Penangsang</h3>
+                            <img src="asset/03.jpg" class="fit">
+                            <p align="justify">Perjalanan Ki Ageng Pemanahan dimulai dari peperangan melawan Arya Penangsang. Arya
+                                Penangsang merupakan Raja
+                                Jipang yang ingin menjadi penguasa Tanah Jawa. Guru spritual Arya Penangsang, Sunan Kudus, berkata
+                                bahwa untuk
+                                menjadi penguasa Tanah Jawa harus menumpaskan Sultan Hadiwijaya. Arya Penangsang pun mencoba
+                                membunuh Sultan
+                                Hadiwijaya dengan mengirimkan utusan namun tidak berhasil. Arya Penangsang pun berniat akan membunuh
+                                Sultan
+                                Hadiwijaya dengan tangannya sendiri.</p>
+                            <p align="justify">Sultan Hadiwijaya yang mengetahui rencana Arya Penangsang pun membuat sayembara dan
+                                berjanji kepada Ki Ageng
+                                Pemanahan dan Ki Panjawi jika keduanya berhasil meredakan pemberontakan Arya Penangsang maka akan
+                                mendapatkan
+                                hadiah tanah Pati dan Alas Mentaok (Mataram). Sultan Hadiwijaya memilih tidak memerangi Arya
+                                Penangsang
+                                sendiri karena masih bersaudara dan merupakan bagian dari keluarga besar Kesultanan Demak. Ki Ageng
+                                Pemanahan
+                                dan Ki Panjawi pun menyanggupi dan bersedia mengikuti sayembara tersebut atas nasehat Ki Martani,
+                                paman
+                                sekaligus penasehat kerajaan Pajang. Perang terjadi di tepian Sungai Caket (Bengawan Solo). Perang
+                                ini
+                                dimenangkan oleh Ki Gede Pemanahan dan Ki Panjawi (cerita mendetil dapat dibaca dalam Babad
+                                Pakualaman).</p>
+                        </section>
+                        <section id='Perjalanan Ki Ageng Pemanahan'>
+                            <h3>Pembukaan Tanah Alas Mentaok (Awal berdirinya Kerajaan Mataram)</h3>
+                            <img src="asset/05.jpg" class="fit">
+                            <p align="justify">Sultan Hadiwijaya harus menepati janjinya yaitu memberikan tanah Pati dan Alas
+                                Mentaok kepada Ki Ageng
+                                Pemanahan dan Ki Panjawi. Namun, Sultan Hadiwijaya tidak langsung memberikan tanah tersebut karena
+                                khawatir
+                                dengan ramalan yang dikeluarkan oleh Sunan Giri bahwa Mataram kelak akan menjadi kerajaan yang besar
+                                yang
+                                melebihi kebesaran Kerajaan Pajang. Hal tersebut membuat Sultan Hadiwijaya resah dan terus menunda
+                                memberikan
+                                tanah tersebut kepada Ki Ageng Pemanahan dan Ki Panjawi. Mengetahui kondisi tersebut, Sunan Kalijaga
+                                yang juga
+                                merupakan guru dari Sultan Hadiwijaya menjadi penengah dalam permasalahan tersebut. Sunan Kalijaga
+                                meminta
+                                Sultan Hadwijaya untuk memberikan tanah tersebut dengan alasan takdir tidak dapat direkayasa dan
+                                membuat Ki
+                                Ageng Pemanahan bersumpah akan setia kepada Sultan Hadiwijaya. Sultan Hadiwijaya akhirnya
+                                menyerahkan tanah
+                                Pati dan Alas Mentaok pada tahun 1556.</p>
+                            <p align="justify">Pada saat itu Alas Mentaok adalah hutan belantara bekas lokasi kerajaan pada masa
+                                lalu yang sudah lama
+                                ditinggalkan sedangkan Pati sudah menjadi kota dengan penduduk yang maju. Karena Ki Ageng Pemanahan
+                                menghormati kakaknya, ia pun menawarkan Ki Panjawi untuk memilih Pati atau Alas Mentaok sebagai
+                                tanahnya. Ki
+                                Panjawi memilih Pati yang makmur dan Ki Ageng Pemanahan menerima tanah Alas Mentaok (Mataram) untuk
+                                dirinya.
+                                Setelah mendapatkan hadiah tanah Alas Mentaok (Mataram), Ki Ageng Pemanahan harus merambah hutan
+                                belantara
+                                untuk membuka daerah tersebut dan menjadikannya kota baru. Ia ditemani oleh Ki Juru Martani beserta
+                                keluarga
+                                dan pengikutnya pun berangkat dari Kerajaan Pajang ke Alas Mentaok (Mataram).</p>
+                            <p align="justify">Sedikit demi sedikit Alas Mentaok mulai memiliki penduduk yang mengisi daerah
+                                tersebut dan Ki Ageng Pemanahan
+                                mulai mendirikan istananya di atas tanah desa yang dipimpinnya (sekarang berlokasi di daerah
+                                Kotagede, DI
+                                Yogyakarta). Ki Ageng Pemanahan diberi gelar Ki Ageng Mataram. Ki Ageng Mataram wafat pada tahun
+                                1584 dan
+                                digantikan oleh putranya yang bernama Sutawijaya atau lebih dikenal dengan nama Panembahan
+                                Senopati.</p>
+                        </section>
+                        <section id='Panembahan Senopati'>
+                            <h3>Masa Kekuasaan Panembahan Senopati</h3>
+                            <img src="asset/07.jpg" class="fit">
+                            <p align="justify">Setelah Ki Ageng Mataram wafat, kekuasaan berpindah kepada putranya yang bernama
+                                Sutawijaya. Sutawijaya yang
+                                bergelar “Mas Ngabehi Loring Pasar” merupakan anak angkat Sultan Hadiwijaya, lalu diangkat oleh
+                                Sultan sebagai
+                                penguasa di wilayah Mataram menggantikan Ki Ageng Mataram. Sutawijaya bercita-cita untuk menguasai
+                                Jawa dan
+                                berusaha mewujudkan keinginannya dengan mulai mengumpulkan pengikut dari berbagai daerah.</p>
+                            <p align="justify">Karena keinginannya menguasai Jawa, Sutawijaya tidak mau berkunjung ke Pajang dan
+                                menghadap kepada Sultan
+                                Hadiwijaya sesuai dengan kewajibannya. Keadaan ini dikarenakan ia merasa telah memiliki Tanah
+                                Mataram yang
+                                semakin makmur. Sutawijaya dianggap melawan dan memberontak kepada Kerajaan Pajang. Hal ini membuat
+                                Sultan
+                                Hadiwijaya marah yang kemudian menyerang Mataram. Penyerangan ini akhirnya menimbulkan perang di
+                                antara
+                                Kerajaan Pajang dan Mataram pada tahun 1587. Perang ini terjadi di Randulawang, yaitu daerah sekitar
+                                Prambanan. Pasukan Pajang dapat dipukul mundur meskipun jumlah mereka jauh lebih banyak. Sultan
+                                Hadiwijaya
+                                jatuh sakit dalam perjalanan pulang ke Pajang. Ia akhirnya meninggal dunia namun sebelumnya sempat
+                                berwasiat
+                                agar anak-anaknya jangan ada yang membenci Senapati serta harus tetap memperlakukannya sebagai kakak
+                                sulung.
+                                Senapati sendiri ikut hadir dalam pemakaman ayah angkatnya itu.</p>
+                        </section>
+                        <section id="Perang">
+                            <b><i><h5>Perkembangan Kekuasaan Kesultanan Mataram</h5></i></b>
+                            <img src="asset/06.jpg" class="fit">
+                            <p align="justify">Pada tahun 1588, Mataram mulai berkembang menjadi kerajaan dengan Sutawijaya sebagai
+                                raja pertamanya yang
+                                bergelar Panembahan Senopati. Kerajaan Pajang yang sedang dipimpin oleh dan Pangeran Banowo
+                                berwasiat untuk
+                                menggabungkan Pajang dan Mataram. Kemudian, Pajang menjadi bawahan Mataram pada tahun 1590.</p>
+                            <p align="justify">Tahun-tahun berikutnya, Panembahan Senopati banyak melakukan penaklukan ke daerah
+                                timur Jawa, hingga akhirnya
+                                wilayah-wilayah penting seperti Jepara, Madiun, Kediri, Bojonegoro, dan sebagian Surabaya berada
+                                dibawah
+                                kekuasaan Mataram. Pada masa kekuasaannya, Panembahan Senopati telah membuat Mataram yang tadinya
+                                hanya berupa
+                                pemukiman kecil di pedalaman hingga menjadi kerajaan yang memiliki wilayah kekuasaan yang luas
+                                meliputi daerah
+                                di Jawa Tengah dan Jawa Timur.</p>
+                        </section>
+                        <!-- Masa Puncak Keemasan Mataram-->
+                        <section id='Sultan Agung'>
+                            <h3>Masa Kekuasaan Sultan Agung</h3>
+                            <img src="asset/08.jpg" class="fit">
+                            <p align="justify">Pada tahun 1601 Panembahan Senopati wafat dan digantikan oleh putranya, Mas Jolang
+                                yang bergelar Panembahan
+                                Hanyokrowati setelah dilantik menjadi Raja Mataram. Masa kekuasaan Panembahan Hanyokrowati hanya
+                                sebentar
+                                karena kecelakaan saat berburu di hutan Krapyak yang merenggut nyawanya pada tahun 1613. Oleh karena
+                                itu,
+                                kemudian ia dikenal sebagai Panembahan Seda Ing Krapyak yang artinya raja yang meninggal di
+                                Krapyak.</p>
+                            <p align="justify">Panembahan Hanyokrowati kemudian digantikan oleh putra bungsunya yaitu Adipati
+                                Martapura. Kekuasaan Adipati
+                                Martapura hanya sebentar lalu digantikan oleh kakak sulungnya (beda ibu) yang bernama Mas Rangsang.
+                                Sebenarnya
+                                secara teknis Raden Mas Rangsang adalah Sultan ke-empat Kesultanan Mataram, namun secara umum
+                                dianggap sebagai
+                                Sultan ketiga karena adiknya yang sakit diangkat sebagai raja hanya sebagai pemenuhan janji
+                                ayahnya.</p>
+                            <p align="justify">Raden Mas Rangsang naik takhta pada tahun 1613 dalam usia 20 tahun menggantikan
+                                Adipati Martapura, yang hanya
+                                menjadi Sultan Mataram selama satu hari. Sesudah naik tahta Mas Rangsang mendapat gelar Sultan Agung
+                                Prabu
+                                Hanyokrokusumo atau lebih dikenal dengan sebutan Sultan Agung. Pada masa kekuasaan Sultan Agung
+                                Kerajaan
+                                Mataram sampai pada puncak kejayaannya. Ibu kota Mataram saat itu masih berada di Kota Gede. Pada
+                                tahun 1614
+                                mulai dibangun istana baru di desa Karta, sekitar 5 km di sebelah barat daya Kota Gede, yang kelak
+                                mulai
+                                ditempati pada tahun 1618. Sultan Agung mewujudkan dan mempertahankan kejayaan melalui upaya
+                                militer,
+                                administrasi negara yang baik, kebudayaan, agama dan kepercayaan serta penggunaan media.</p>
+                        </section>
+                        <section id='Ekspansi Wilayah'>
+                            <h3>Ekspansi wilayah Kerajaan Mataram</h3>
+                            <img src="asset/09.jpg" class="fit">
+                            <p align="justify">Dalam pemerintahannya, Sultan Agung banyak melakukan ekspansi ke beberapa wilayah di
+                                Jawa dalam rangka perluasan wilayah kerajaan Mataram. Ia melanjutkan perjuangan Mataram untuk
+                                menyatukan Pulau Jawa dengan melakukan penaklukan wilayah menggunakan taktik penyerangan secara
+                                militer maupun politik. Keberhasilan besar Kesultanan Mataram yaitu dalam menaklukan daerah di timur
+                                Jawa, yaitu menaklukan Surabaya. Sultan Agung belajar dari ayah dan kakeknya yang gagal dalam
+                                penyerangan terhadap Surabaya. Ia tidak serta merta menyerang Surabaya dengan membawa pasukan yang
+                                banyak karena ia tahu bahwa Surabaya mempunyai sekutu yang siap membantu dalam mempertahankan daerah
+                                kekuasaannya. Selain itu, Kota Surabaya memiliki pertahanan yang sangat kuat.</p>
+                            <p align="justify">Sultan Agung menyadari hal itu sehingga dalam rangka menaklukkan Surabaya ia tidak
+                                langsung menyerang pusat kota, namun ia terlebih dahulu menguasai daerah-daerah bawahan yang menjadi
+                                pemasok bahan makanan ke pusat kota Surabaya. Beberapa daerah yang berhasil ditaklukan adalah
+                                Wirasaba (1615), Lasem (1616), Pasuruan (1617), dan Tuban (1619).</p>
+                        </section>
+                        <section id="Penaklukan Surabaya">
+                            <h3>Penaklukan Surabaya dan Madura(1620-1625)</h3>
+                            <p>Penaklukan terhadap kota Surabaya dilakukan selama bertahun-tahun. Serangan-serangan dan dan strategi
+                                perang dilakukan oleh Sultan Agung dan pasukannya untuk menaklukan Surabaya.</p>
+                            <p>Penaklukan terhadap kota Surabaya dilakukan selama bertahun-tahun. Serangan-serangan dan dan strategi
+                                perang dilakukan oleh Sultan Agung dan pasukannya untuk menaklukan Surabaya.</p>
+                        </section>
+
+                        <!--Masa Perpecahan dan Keruntuhan Mataram-->
+                        <section id='Pasca Sultan Agung'>
+                            <h3>Pasca Kekuasaan Sultan Agung</h3>
+                            <p align="justify">Pada tahun 1645 Sultan Agung wafat dan dimakamkan di Imogiri, ia digantikan oleh
+                                putranya yg bergelar
+                                Amangkurat (Amangkurat I). Amangkurat I memindahkan lokasi keraton ke Pleret (1647), tidak jauh dari
+                                Kerta.
+                                Selain itu, ia tidak lagi
+                                menggunakan gelar sultan, melainkan "sunan" (dari "Susuhunan" atau "Yang Dipertuan"). Pemerintahan
+                                Amangkurat
+                                I kurang stabil karena banyak ketidakpuasan dan pemberontakan. Pada masanya, terjadi pemberontakan
+                                besar yang
+                                dipimpin oleh Trunajaya dan memaksa Amangkurat bersekutu dengan VOC. Ia wafat di Tegalarum (1677)
+                                ketika
+                                mengungsi sehingga dijuluki Sunan Tegalarum. Penggantinya, Amangkurat II (Amangkurat Amral), sangat
+                                patuh pada
+                                VOC sehingga kalangan istana banyak yang tidak puas dan pemberontakan terus terjadi. Pada masanya,
+                                kraton
+                                dipindahkan lagi ke Kartasura (1680), sekitar 5km sebelah barat Pajang karena kraton yang lama
+                                dianggap telah
+                                tercemar.</p>
+                            <p align="justify">Pengganti Amangkurat II berturut-turut adalah Amangkurat III (1703-1708), Pakubuwana
+                                I (1704-1719),
+                                Amangkurat IV (1719-1726), Pakubuwana II (1726-1749). VOC tidak menyukai Amangkurat III karena
+                                menentang VOC
+                                sehingga VOC mengangkat Pakubuwana I (Puger) sebagai raja. Akibatnya Mataram memiliki dua raja dan
+                                ini
+                                menyebabkan perpecahan internal. Amangkurat III memberontak dan menjadi "king in exile" hingga
+                                tertangkap di
+                                Batavia lalu dibuang ke Ceylon.</p>
+                        </section>
+                        <section id='Perpecahan'>
+                            <h3>Perpecahan Mataram</h3>
+                            <img src="asset/10.jpg" class="fit">
+                            <p align="justify">Kekacauan politik baru dapat diselesaikan pada masa Pakubuwana III setelah pembagian
+                                wilayah Mataram menjadi
+                                dua yaitu Kesultanan Ngayogyakarta dan Kasunanan Surakarta tanggal 13 Februari 1755. Pembagian
+                                wilayah ini
+                                tertuang dalam Perjanjian Giyanti (nama diambil dari lokasi penandatanganan, di sebelah timur kota
+                                Karanganyar, Jawa Tengah). Berakhirlah era Mataram sebagai satu kesatuan politik dan wilayah.
+                                Walaupun
+                                demikian sebagian masyarakat Jawa beranggapan bahwa Kesultanan Yogyakarta dan Kasunanan Surakarta
+                                adalah "ahli
+                                waris" dari Kesultanan Mataram. Kesultanan Yogyakarta diperintah oleh Raja Mangkubumi yang diberi
+                                gelar
+                                Hamengkubuwono I, sedangkan Kasuhunan Surakarta diperintah oleh Susuhunan Pakubuwono II.</p>
+                            <p align="justify">Pada tahun 1757, berdasarkan Perjanjian Salatiga, Kerajaan Mataram dibagi menjadi
+                                tiga, yaitu Kesultanan
+                                Yogyakarta, Kasunanan Surakarta dan Mangkunegaran. Daerah Mangkunegaran diperintah oleh Mas Said
+                                yang diberi
+                                gelar Pangeran Adipati Arya Mangkunegaran.
+                                <br>Pada tahun 1813 Kesultanan Yogyakarta dibagi menjadi dua kerajaan, yaitu kesultanan Yogyakarta
+                                dan
+                                Kerajaan Pakualaman, yang diperintah oleh Paku Alam yang semula adalah Adipati Kesultanan
+                                Yogyakarta. Dengan
+                                demikian Kerajaan Mataram dibagi menjadi empat kerajaan kecil, yaitu Kesultanan Yogyakarta,
+                                Kasunanan
+                                Surakarta, Kerajaan Mangkunegaran dan Kerajaan Pakualaman.</p>
+                        </section>
+                    </div>
+                </article>
+            </div>
+            <div id='map' class="col-sm-8"></div>
+        </div>
+    </div>
 
     <script>
-     var tinggi= $('#cover').height()
-     console.log(tinggi)
-        $('#Silsilah').css('padding-top', tinggi+10)
-
+        var tinggi = $('#cover').height()
+        $('#narasi').css('padding-top', tinggi + 15)
+        $('.anchor').css('top', -1*(tinggi+15))
         L.mapbox.accessToken = 'pk.eyJ1Ijoic2hlaWxhYW1hbGlhIiwiYSI6IkNiTmdlQ1kifQ.AQMh0TeJoFX1TyKDObxvxw';
 
         // Replace 'mapbox.streets' with your map id.
@@ -339,16 +398,16 @@
         // fungsi untuk menampilkan poligon dari project id Mapbox
         var poligon = L.mapbox.featureLayer('sheilaamalia.pn4knc8g');
 
-        poligon.on('ready', function() {
+        poligon.on('ready', function () {
             map.fitBounds(poligon.getBounds());
         });
 
         var places = {
             type: 'FeatureCollection', features: [
-                {
-                    geometry: {type: "Point", coordinates: [110.3979005724011, -7.818922576191321]},
-                    properties: {id: "cover", zoom: 9}, type: 'Feature'
-                },
+//                {
+//                    geometry: {type: "Point", coordinates: [110.3979005724011, -7.818922576191321]},
+//                    properties: {id: "cover", zoom: 9}, type: 'Feature'
+//                },
 
                 /* Lokasi kerajaan pajang*/
                 {
@@ -388,22 +447,22 @@
 
                 {
                     geometry: {type: "Point", coordinates: [110.4917533444782, -7.755077591137338]},
-                    properties: {id: "Panembahan Senopati", zoom:9}, type: 'Feature'
+                    properties: {id: "Panembahan Senopati", zoom: 9}, type: 'Feature'
                 },
                 {
                     geometry: {type: "Point", coordinates: [110.4917533444782, -7.755077591137338]},
-                    properties: {id: "Perang", zoom:9}, type: 'Feature'
+                    properties: {id: "Perang", zoom: 9}, type: 'Feature'
                 },
 
                 {
                     geometry: {type: "Point", coordinates: [110.36385457846291, -7.811075792098948]},
                     properties: {id: "Sultan Agung", title: 'Karta'}, type: 'Feature'
                 },
-           /*     {
-                    geometry: {type: "Point", coordinates: [-0.12416858, 51.50779757]},
-                    properties: {id: "Ekspansi Wilayah"}, type: 'Feature'
-                },
-*/
+                /*     {
+                 geometry: {type: "Point", coordinates: [-0.12416858, 51.50779757]},
+                 properties: {id: "Ekspansi Wilayah"}, type: 'Feature'
+                 },
+                 */
                 /*Penaklukan wirasaba*/
                 {
                     geometry: {type: "Point", coordinates: [110.3979096553837, -7.818913543993155]},
@@ -447,17 +506,17 @@
                 },
                 {
                     geometry: {type: "Point", coordinates: [110.40484358641994, -7.868850051829784]},
-                    properties: {id: "Pasca Sultan Agung", title:"Plered", zoom: 10}, type: 'Feature'
-                },   {
+                    properties: {id: "Pasca Sultan Agung", title: "Plered", zoom: 10}, type: 'Feature'
+                }, {
                     geometry: {type: "Point", coordinates: [110.74087900119999, -7.556109560296816]},
-                    properties: {id: "Pasca Sultan Agung", title:"Kartasura", zoom: 10}, type: 'Feature'
+                    properties: {id: "Pasca Sultan Agung", title: "Kartasura", zoom: 10}, type: 'Feature'
                 },
                 {
                     geometry: {type: "Point", coordinates: [110.81793189722129, -7.578976180562846]},
                     properties: {id: "Pasca Sultan Agung", title: "Surakarta", zoom: 10}, type: 'Feature'
                 },
 
-            /*Perpecahan Mataram*/
+                /*Perpecahan Mataram*/
                 {
                     geometry: {type: "Point", coordinates: [110.36385457846291, -7.811075792098948]},
                     properties: {id: "Perpecahan", title: "Karta", zoom: 10}, type: 'Feature'
@@ -483,25 +542,35 @@
         var placesLayer = L.mapbox.featureLayer(places)
                 .addTo(map);
 
-    /*     placesLayer.eachLayer(function (layer) {
-             var content = (layer.feature.properties.title);
-             console.log(layer);
-             layer.bindPopup(content).openPopup();
-         });
-     console.log(placesLayer);*/
-
         var narrative = document.getElementById('narrative'),
                 sections = narrative.getElementsByTagName('section'),
                 currentId = '';
 
         setId('cover');
 
-        var line_points = [[-7.57020308036945, 110.78510284423828], [-7.763382015212087, 110.50048828124999,],[-7.816786243917258, 110.45997619628906, ],[-7.818922576191321, 110.3979005724011,]];
+        var line_points = [[-7.57020308036945, 110.78510284423828], [-7.763382015212087, 110.50048828124999,], [-7.816786243917258, 110.45997619628906,], [-7.818922576191321, 110.3979005724011,]];
 
         var polyline_options = {
             color: '#000'
         };
         var polyline1 = L.polyline(line_points, polyline_options);
+
+//        function getPoint(start, end, tambah) {
+//
+//            var m = (end[0]-start[0])/(end[1]-start[1]);
+//            var c = m*start[0]-start[1]
+//            point = []
+//
+//            for (i=start[1]; i<end[1]; i=i+tambah) {
+//                console.log(i)
+//                j = m*start[1] + c;
+//                point.push({lat:j,lng:i})
+//
+//            }
+//        }
+
+        var perjalanan = L.mapbox.featureLayer()
+                .loadURL('asset/perjalanan.geojson')
 
         function setId(newId) {
 
@@ -509,13 +578,12 @@
 
             placesLayer.eachLayer(function (layer) {
                 if (layer.feature.properties.id === newId) {
-                    map.addLayer(layer);
-                    map.setView(layer.getLatLng(), layer.feature.properties.zoom || 14);
-                   /* layer.bindPopup(content);*/
                     layer.setIcon(L.mapbox.marker.icon({
                         'marker-color': '#99d8c9'
                     }));
-
+                    var content = (layer.feature.properties.title);
+                    layer.addTo(map).bindPopup("cek");
+                    map.setView(layer.getLatLng(), layer.feature.properties.zoom || 14);
                 }
                 else {
                     map.removeLayer(layer);
@@ -523,60 +591,80 @@
             });
 
 
-
-            if(newId=="Silsilah"){
+            if (newId == "Silsilah") {
                 map.addLayer(poligon);
                 map.removeLayer(polyline1)
             }/*
-            else if(newId=="ekspansi"){
-                map.removeLayer(poligonSilsilah);
-                map.removeLayer(poligonX);
-                map.addLayer(poligonEkspansi);
-            }
-            else if(newId=="x"){
-                map.removeLayer(poligonSilsilah);
-                map.addLayer(poligonX);
-                map.removeLayer(poligonEkspansi);
-            }*/
-            else if (newId=="Perjalanan Ki Ageng Pemanahan"){
+             else if(newId=="ekspansi"){
+             map.removeLayer(poligonSilsilah);
+             map.removeLayer(poligonX);
+             map.addLayer(poligonEkspansi);
+             }
+             else if(newId=="x"){
+             map.removeLayer(poligonSilsilah);
+             map.addLayer(poligonX);
+             map.removeLayer(poligonEkspansi);
+             }*/
+            else if (newId == "Perjalanan Ki Ageng Pemanahan") {
+                console.log(polyline1._latlngs)
                 polyline1.addTo(map);
-            }
-            else{
+                var j = 0;
+                var track = [];
+                // Create a marker and add it to the map.
+                var marker = L.marker([polyline1._latlngs[0].lat, polyline1._latlngs[0].lng], {
+                    icon: L.mapbox.marker.icon({
+                        'marker-color': '#f86767'
+                    })
+                }).addTo(map);
+//                getPoint([polyline1._latlngs[0].lat,polyline1._latlngs[0].lng],[polyline1._latlngs[1].lat,polyline1._latlngs[1].lng], 0.001);
+
+                tick();
+                function tick() {
+                    // Set the marker to be at the same point as one
+                    // of the segments or the line.
+                    marker.setLatLng(L.latLng(
+                            perjalanan.coordinates[j][1],
+                            perjalanan.coordinates[j][0]));
+
+                    // Move to the next point of the line
+                    // until `j` reaches the length of the array.
+                    if (++j < polyline1._latlngs.length) setTimeout(tick, 500);
+                }            }
+            else {
                 map.removeLayer(poligon);
 
-                console.log(map.hasLayer(polyline1))
-                if(map.hasLayer(polyline1)){
+                if (map.hasLayer(polyline1)) {
                     map.removeLayer(polyline1);
                 }
             }
             // Here we load the features.json from another project
             // to use with the map initialized above
             /*var start = { x: 110.3979096553837, y: -7.818913543993155 };
-            var end = { x: 111.52996466383171, y: -7.63684701124045 };
-            var generator = new arc.GreatCircle(start, end, { name: 'coba' });
-            var line = generator.Arc(100, { offset: 10 });
-            L.geoJson(line.json()).addTo(map);*/
-           /* var marker = e.layer,
-                    feature = marker.feature;
-            var content = '<h2>'+ layer.feature.properties.title+'<\/h2>' + '<img src="'+ layer.feature.properties.image+'" alt="">';
-            marker.bindPopup(content);
-*/
+             var end = { x: 111.52996466383171, y: -7.63684701124045 };
+             var generator = new arc.GreatCircle(start, end, { name: 'coba' });
+             var line = generator.Arc(100, { offset: 10 });
+             L.geoJson(line.json()).addTo(map);*/
+            /* var marker = e.layer,
+             feature = marker.feature;
+             var content = '<h2>'+ layer.feature.properties.title+'<\/h2>' + '<img src="'+ layer.feature.properties.image+'" alt="">';
+             marker.bindPopup(content);
+             */
 
 
             /*open popup*/
             /*map.featureLayer.on('ready', function(e) {
-                document.getElementById('open-popup').onclick = clickButton;
-            });
-            function clickButton() {
-                map.featureLayer.eachLayer(function(marker) {
-                    // You can replace this test for anything else, to choose the right
-                    // marker on which to open a popup. by default, popups are exclusive
-                    // so opening a new one will close all of the others.
-                    if (marker.feature.properties.title === 'Capital Pride Parade') {
-                        marker.openPopup();
-                    }
-                });
-            }*/
+             document.getElementById('open-popup').onclick = clickButton;
+             });
+             function clickButton() {
+             map.featureLayer.eachLayer(function(marker) {
+             // You can replace this test for anything else, to choose the right
+             // marker on which to open a popup. by default, popups are exclusive
+             // so opening a new one will close all of the others.
+             if (marker.feature.properties.title === 'Capital Pride Parade') {
+             marker.openPopup();
+             }
+             });
+             }*/
             /*open popup*/
 
             // fungsi untuk highlight section yg sedang aktif (current section)
@@ -586,29 +674,60 @@
 
             // set id yang sedang aktif sebagai current id
             currentId = newId;
+
         }
 
-
-        // fungsi scrolling pada narasi
-        narrative.onscroll = function (e) {
+        var narasi = document.getElementById("narasi");
+        document.onscroll=function (e) {
             var narrativeHeight = narrative.offsetHeight;
             var newId = currentId;
-
-            // Fungsi untuk mencari section yang sekarang sedang di-scroll dengan fungsi iterasi
-            /*section akan berpindah menjadi id baru apabila telah melewati batas panjang section sebelumnya*/
             for (var i = sections.length - 1; i >= 0; i--) {
                 var rect = sections[i].getBoundingClientRect();
                 if (rect.top >= 0 && rect.top <= narrativeHeight) {
                     newId = sections[i].id;
                 }
             }
-
             setId(newId);
+        }
+
+        // fungsi scrolling pada narasi
+//        narrative.onscroll = function (e) {
+//            var narrativeHeight = narrative.offsetHeight;
+//            var newId = currentId;
+//
+//            // Fungsi untuk mencari section yang sekarang sedang di-scroll dengan fungsi iterasi
+//            /*section akan berpindah menjadi id baru apabila telah melewati batas panjang section sebelumnya*/
+//            for (var i = sections.length - 1; i >= 0; i--) {
+//                var rect = sections[i].getBoundingClientRect();
+//                if (rect.top >= 0 && rect.top <= narrativeHeight) {
+//                    newId = sections[i].id;
+//                }
+//            }
+//
+//            setId(newId);
+//        };
+
+        var legend = L.control({position: 'bottomright'});
+
+        legend.onAdd = function (map) {
+
+            var div = L.DomUtil.create('div', 'info legend')
+            div.innerHTML += '<h1>Legenda</h1>'
+            div.innerHTML += '<li><img src="http://a.tiles.mapbox.com/v4/marker/pin-m+99d8c9.png?access_token=pk.eyJ1Ijoic2hlaWxhYW1hbGlhIiwiYSI6IkNiTmdlQ1kifQ.AQMh0TeJoFX1TyKDObxvxw" /><span class="right">Titik Lokasi<span></li>'
+            div.innerHTML += '<li><img src="http://s33.postimg.org/5row0r6zj/MG_9738.jpg" width="10px" height="10px"/><span class="right">Titik Lokasi<span></li>'
+            div.innerHTML += '<li><span style="width: 50px;height:20px;display:inline-block;background-color:#97D7C8"></span><span class="right">Luasan</span></li>'
+
+            return div;
         };
+
+        legend.addTo(map);
+
+
+
+
         $(function () {
             $('[data-toggle="popover"]').popover()
         })
     </script>
-</div>
 </body>
 </html>
