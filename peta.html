@@ -13,6 +13,7 @@
     <script src='http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js'></script>
     <script src='js/mapbox.js'></script>
     <script src='asset/perjalanan2.geojson'></script>
+    <script src='asset/perjalanan3.geojson'></script>
     <link href='css/mapbox.css' rel='stylesheet'/>
 
     <!--link external css dan javascript-->
@@ -195,7 +196,8 @@
                                 belantara
                                 untuk membuka daerah tersebut dan menjadikannya kota baru. Ia ditemani oleh Ki Juru Martani beserta
                                 keluarga
-                                dan pengikutnya pun berangkat dari Kerajaan Pajang ke Alas Mentaok (Mataram).</p>
+                                dan pengikutnya pun berangkat dari Kerajaan Pajang ke Alas Mentaok (Mataram).
+                            <br><b>Rute perjalanan Ki Ageng Pemanahan dapat dilihat pada peta</b></p>
                             <p align="justify">Sedikit demi sedikit Alas Mentaok mulai memiliki penduduk yang mengisi daerah
                                 tersebut dan Ki Ageng Pemanahan
                                 mulai mendirikan istananya di atas tanah desa yang dipimpinnya (sekarang berlokasi di daerah
@@ -339,7 +341,7 @@
                                 menentang VOC
                                 sehingga VOC mengangkat Pakubuwana I (Puger) sebagai raja. Akibatnya Mataram memiliki dua raja dan
                                 ini
-                                menyebabkan perpecahan internal. Amangkurat III memberontak dan menjadi "king in exile" hingga
+                                menyebabkan perpecahan internal. Amangkurat III memberontak dan
                                 tertangkap di
                                 Batavia lalu dibuang ke Ceylon.</p>
                         </section>
@@ -428,11 +430,11 @@
                 },
                 {
                     geometry: {type: "Point", coordinates: [110.50048828124999, -7.763382015212087]},
-                    properties: {id: "Perjalanan Ki Ageng Pemanahan", zoom: 10}, type: 'Feature'
+                    properties: {id: "Perjalanan Ki Ageng Pemanahan", title: 'Taji', zoom: 10}, type: 'Feature'
                 },
                 {
                     geometry: {type: "Point", coordinates: [110.45997619628906, -7.816786243917258]},
-                    properties: {id: "Perjalanan Ki Ageng Pemanahan", zoom: 10}, type: 'Feature'
+                    properties: {id: "Perjalanan Ki Ageng Pemanahan", title: 'Sungai Opak', zoom: 10}, type: 'Feature'
                 },
                 {
                     geometry: {type: "Point", coordinates: [110.3979005724011, -7.818922576191321]},
@@ -452,41 +454,6 @@
                 {
                     geometry: {type: "Point", coordinates: [110.36385457846291, -7.811075792098948]},
                     properties: {id: "Sultan Agung", title: 'Karta', zoom: 9}, type: 'Feature'
-                },
-                /*     {
-                 geometry: {type: "Point", coordinates: [-0.12416858, 51.50779757]},
-                 properties: {id: "Ekspansi Wilayah"}, type: 'Feature'
-                 },
-                 */
-                /*Penaklukan wirasaba*/
-                {
-                    geometry: {type: "Point", coordinates: [110.3979096553837, -7.818913543993155]},
-                    properties: {id: "Penaklukan Wirasaba", title: "Mataram", zoom: 10}, type: 'Feature'
-                },
-                {
-                    geometry: {type: "Point", coordinates: [111.52996466383171, -7.63684701124045]},
-                    properties: {id: "Penaklukan Wirasaba", title: "Madiun", zoom: 10}, type: 'Feature'
-                },
-                {
-                    geometry: {type: "Point", coordinates: [111.4666010928473, -7.868128765687112]},
-                    properties: {id: "Penaklukan Wirasaba", title: "Ponorogo", zoom: 10}, type: 'Feature'
-                },
-                {
-                    geometry: {type: "Point", coordinates: [112.3695354041898, -7.620324696087433]},
-                    properties: {id: "Penaklukan Wirasaba", title: "Wirasaba", zoom: 10}, type: 'Feature'
-                },
-                {
-                    geometry: {type: "Point", coordinates: [112.75278535294819, -7.262863721473984]},
-                    properties: {id: "Penaklukan Wirasaba", title: "Surabaya", zoom: 10}, type: 'Feature'
-                },
-                {
-                    geometry: {type: "Point", coordinates: [113.2862636763271, -7.098982756640988]},
-                    properties: {id: "Penaklukan Wirasaba", title: "Madura", zoom: 10}, type: 'Feature'
-                },
-                /*Penaklukan Suarabaya*/
-                {
-                    geometry: {type: "Point", coordinates: [110.3975624357421, -7.822878865197143]},
-                    properties: {id: "Penaklukan Surabaya"}, type: 'Feature'
                 },
 
                 /*Perpindahan Kraton*/
@@ -543,13 +510,19 @@
 
         setId('cover');
 
-        var line_points = [[-7.57020308036945, 110.78510284423828], [-7.763382015212087, 110.50048828124999,], [-7.816786243917258, 110.45997619628906,], [-7.818922576191321, 110.3979005724011,]];
+        var line_points = [[-7.57020308036945, 110.78510284423828], [-7.763382015212087, 110.50048828124999], [-7.816786243917258, 110.45997619628906], [-7.818922576191321, 110.3979005724011]];
+        var line_points2 = [[-7.822878865197143, 110.3975624357421], [-7.811075792098948, 110.36385457846291], [-7.868850051829784, 110.40484358641994], [-7.556109560296816, 110.74087900119999], [-7.578976180562846, 110.81793189722129]];
+
 
         var polyline_options = {
             color: '#000'
         };
+        var polyline_options2 = {
+            color: '#000'
+        };
 
         var polyline1 = L.polyline(line_points, polyline_options);
+        var polyline2 = L.polyline(line_points2, polyline_options2);
 
         var jalan = L.marker([polyline1._latlngs[0].lat, polyline1._latlngs[0].lng], {
             icon: L.mapbox.marker.icon({
@@ -557,22 +530,14 @@
                 'zIndexOffset':'5000'
             })
         })
-//        function getPoint(start, end, tambah) {
-//
-//            var m = (end[0]-start[0])/(end[1]-start[1]);
-//            var c = m*start[0]-start[1]
-//            point = []
-//
-//            for (i=start[1]; i<end[1]; i=i+tambah) {
-//                console.log(i)
-//                j = m*start[1] + c;
-//                point.push({lat:j,lng:i})
-//
-//            }
-//        }
 
-//        var perjalanan = L.mapbox.featureLayer()
-//                .loadURL('https://raw.githubusercontent.com/sheilaamalia/sheilaamalia.github.io/master/asset/perjalanan2.geojson').addTo(map)
+        var jalan2 = L.marker([polyline2._latlngs[0].lat, polyline2._latlngs[0].lng], {
+            icon: L.mapbox.marker.icon({
+                'marker-color': '#f86767',
+                'zIndexOffset':'5000'
+            })
+        })
+
 
         var coords = []
         L.geoJson(perjalanan, {
@@ -585,6 +550,18 @@
             }
         })
 
+      /*  var coords2 = []
+        L.geoJson(perjalanan3, {
+            style: function (feature) {
+                return {color: feature.properties.color};
+            },
+            onEachFeature: function (feature, layer) {
+                console.log(feature.geometry.coordinates);
+                coords.push({lat:feature.geometry.coordinates[1],lng:feature.geometry.coordinates[0]})
+            }
+        })
+
+*/
 
         function setId(newId) {
 
@@ -603,8 +580,6 @@
                     map.removeLayer(layer);
                 }
             });
-
-
             if (newId == "Silsilah") {
                 map.addLayer(poligon);
                 map.removeLayer(polyline1)
@@ -636,6 +611,27 @@
                     if (++j < coords.length) setTimeout(tick, 100);
                 }
         }
+            else if (newId == "Pasca Sultan Agung") {
+                polyline2.addTo(map);
+                var j = 0;
+                var track = [];
+                // Create a marker and add it to the map.
+                jalan2.addTo(map);
+//                getPoint([polyline1._latlngs[0].lat,polyline1._latlngs[0].lng],[polyline1._latlngs[1].lat,polyline1._latlngs[1].lng], 0.001);
+
+                tick();
+                function tick() {
+                    // Set the marker to be at the same point as one
+                    // of the segments or the line.
+                    jalan2.setLatLng(L.latLng(
+                            coords[j].lat,
+                            coords[j].lng));
+
+                    // Move to the next point of the line
+                    // until `j` reaches the length of the array.
+                    if (++j < coords.length) setTimeout(tick, 100);
+                }
+            }
             else {
                 map.removeLayer(poligon);
                 map.removeLayer(poligon2);
@@ -644,6 +640,12 @@
                 }
                 if (map.hasLayer(jalan)) {
                     map.removeLayer(jalan);
+                }
+                if (map.hasLayer(polyline2)) {
+                    map.removeLayer(polyline2);
+                }
+                if (map.hasLayer(jalan2)) {
+                    map.removeLayer(jalan2);
                 }
             }
 
@@ -670,41 +672,20 @@
             setId(newId);
         }
 
-        // fungsi scrolling pada narasi
-//        narrative.onscroll = function (e) {
-//            var narrativeHeight = narrative.offsetHeight;
-//            var newId = currentId;
-//
-//            // Fungsi untuk mencari section yang sekarang sedang di-scroll dengan fungsi iterasi
-//            /*section akan berpindah menjadi id baru apabila telah melewati batas panjang section sebelumnya*/
-//            for (var i = sections.length - 1; i >= 0; i--) {
-//                var rect = sections[i].getBoundingClientRect();
-//                if (rect.top >= 0 && rect.top <= narrativeHeight) {
-//                    newId = sections[i].id;
-//                }
-//            }
-//
-//            setId(newId);
-//        };
-
         var legend = L.control({position: 'bottomright'});
 
         legend.onAdd = function (map) {
 
             var div = L.DomUtil.create('div', 'info legend')
             div.innerHTML += '<h2>Legenda</h2>'
-            div.innerHTML += '<li><img src="http://a.tiles.mapbox.com/v4/marker/pin-m+99d8c9.png?access_token=pk.eyJ1Ijoic2hlaWxhYW1hbGlhIiwiYSI6IkNiTmdlQ1kifQ.AQMh0TeJoFX1TyKDObxvxw" /><span class="right">Titik Lokasi<span></li>'
-//            div.innerHTML += '<li><img src="http://s33.postimg.org/5row0r6zj/MG_9738.jpg" width="10px" height="10px"/><span class="right">Titik Lokasi<span></li>'
-            div.innerHTML += '<li><span style="width: 50px;height:20px;display:inline-block;background-color:#97D7C8"></span><span class="right">Luasan</span></li>'
-
+            div.innerHTML += '<li><img src="http://a.tiles.mapbox.com/v4/marker/pin-m+99d8c9.png?access_token=pk.eyJ1Ijoic2hlaWxhYW1hbGlhIiwiYSI6IkNiTmdlQ1kifQ.AQMh0TeJoFX1TyKDObxvxw" /><span class="right">Titik lokasi<span></li>'
+            div.innerHTML += '<li><img src="https://s32.postimg.org/sa6wbca9h/Capture.jpg" width="40px" height="30px"/><span class="right">Luasan wilayah<span></li>'
+            div.innerHTML += '<li><img src="https://s31.postimg.org/hdofmgpwb/Capture1.jpg" width="40px" height="30px"/><span class="right">Rute perjalanan<span></li>'
             return div;
         };
 
         legend.addTo(map);
 
-//        $(function () {
-//            $('[data-toggle="popover"]').popover()
-//        })
     </script>
 </body>
 </html>
