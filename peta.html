@@ -435,7 +435,7 @@
                 /* Lokasi kerajaan pajang*/
                 {
                     geometry: {type: "Point", coordinates: [110.78510284423828, -7.57020308036945]},
-                    properties: {id: "Silsilah", title: 'Kerajaan Pajang', description:'Kerajaan Pajang adalah sebuah kerajaan yang berpusat di Jawa Tengah sebagai kelanjutan Kerajaan Demak. Kompleks keraton, yang sekarang tinggal batas-batas fondasinya saja, berada di perbatasan Kelurahan Pajang, Kota Solo dan Desa Makam haji, Karatsura, Sukoharjo.', image:"popup/kerajaanpajang.jpg", zoom: 8}, type: 'Feature'
+                    properties: {id: "Silsilah", title: 'Kerajaan Pajang','marker-symbol': '1', description:'Kerajaan Pajang adalah sebuah kerajaan yang berpusat di Jawa Tengah sebagai kelanjutan Kerajaan Demak. Kompleks keraton, yang sekarang tinggal batas-batas fondasinya saja, berada di perbatasan Kelurahan Pajang, Kota Solo dan Desa Makam haji, Karatsura, Sukoharjo.', image:"popup/kerajaanpajang.jpg", zoom: 8}, type: 'Feature'
                 },
                 /* Manahan*/
                 {
@@ -588,7 +588,6 @@
         })
 
 */
-
         function setId(newId) {
 
             if (newId === currentId) return;
@@ -596,7 +595,8 @@
             placesLayer.eachLayer(function (layer) {
                 if (layer.feature.properties.id === newId) {
                     layer.setIcon(L.mapbox.marker.icon({
-                        'marker-color': '#99d8c9'
+                        'marker-color': '#99d8c9',
+                        'marker-symbol': '1',
                     }));
                     var content = '<h2>'+ layer.feature.properties.title+'<\/h2>' + '<img src="'+ layer.feature.properties.image+'" alt="">'+layer.feature.properties.description;
                     layer.addTo(map).bindPopup(content);
