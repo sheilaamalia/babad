@@ -6,17 +6,13 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery1.min.js"></script>
     <script src="js/bootstrap1.min.js"></script>
-
     <meta charset=utf-8/>
     <title>Atlas Babad Tanah Jawi</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
     <script src='http://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js'></script>
     <script src='js/mapbox.js'></script>
     <script src='asset/perjalanan2.geojson'></script>
-    <script src='asset/perjalanan3.geojson'></script>
     <link href='css/mapbox.css' rel='stylesheet'/>
-
-    <!--link external css dan javascript-->
     <link rel="stylesheet" type="text/css" href="css/babad.css">
 
     <style>
@@ -35,29 +31,17 @@
     <div id="wrap" class="container">
         <div id="navigasi" class="row">
             <nav class="navbar navbar-inverse navbar-fixed-top col-md-12">
-                <!-- <div class="container-fluid">
-                     <div class="navbar-header">
-                         <a class="navbar-brand" href="#"></a>
-                     </div>-->
-                <!-- <a class="navbar-logo" href="index.html"><img src="images/logo_ugm.gif" alt="logo"></a>-->
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="index.html">Beranda</a></li>
-                    <!--<li><a href="#Silsilah">Masa Pra</a></li>
-                    <li><a href="#Peralihan Kekuasaan">Masa Kejayaan</a></li>
-                    <li><a href="#Pasca Sultan Agung">Masa Keruntuhan</a></li>-->
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Daftar Isi
                         <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><strong>Masa Pra Kekuasaan</strong></a>
+                        <li><a href="#"><strong>Masa Awal Kebangkitan</strong></a>
                             <ul>
                                 <li><a href="#1">Asal mula berdirinya Kesultanan Mataram Islam</a></li>
                             </ul>
-                        </li>
-                        <ul>
-                            <li><a href="#2">Sosok Ki Ageng Pemanahan</a></li>
-                        </ul>
                         </li>
                         <ul>
                             <li><a href="#3">Peristiwa Pemberontakan Arya Penangsang</a></li>
@@ -94,14 +78,9 @@
                 </div>
 
                 <div class="container">
-                    <!-- Trigger the modal with a button -->
                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Petunjuk</button>
-
-                    <!-- Modal -->
                     <div class="modal fade" id="myModal" role="dialog">
                         <div class="modal-dialog">
-
-                            <!-- Modal content-->
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -132,7 +111,7 @@
             <div id="narasi" class="col-md-4">
                 <article id='narrative'>
                     <div class='sections prose'>
-                        <!--Masa Pra Kekuasaan Mataram-->
+                        <!--Masa Awal Kebangkitan Mataram-->
                         <a class="anchor" id="1"></a>
                         <section id='Silsilah'>
                             <h3>Asal mula berdirinya Kesultanan Mataram Islam</h3>
@@ -141,7 +120,7 @@
                         </section>
                         <a class="anchor" id="2"></a>
                         <section id='Ki Ageng Pemanahan'>
-                            <h3>Sosok Ki Ageng Pemanahan</h3>
+                            <i><b><h5>Sosok Ki Ageng Pemanahan</h5></b></i>
                             <img src="asset/02.jpg" class="fit">
                             <p align="justify">Ki Ageng Pemanahan adalah sosok pembuka Tanah Alas Mentaok (Mataram) yang akan
                                 menjadi daerah asal muasal
@@ -331,15 +310,6 @@
                                 Wirasaba (1615), Lasem (1616), Pasuruan (1617), dan Tuban (1619).</p>
                             <p align="justify">Pada masa Sultan Agung, seluruh daerah di Jawa hampir berhasil dikuasai oleh Mataram kecuali Banten karena terhalang oleh Batavia yang tidak berhasil ditaklukkan. Pada masa itu, Batavia masih diduduki militer VOC Belanda. Sultan Agung dan pasukannya mencoba menaklukan daerah Batavia namun gagal. <b>(Kekuasaan wilayah Mataram dibawah pimpinan Sultan Agung dapat dilihat pada peta)</b></p>
                         </section>
-                       <!-- <a class="anchor" id="8"></a>
-                        <section id="Penaklukan Surabaya">
-                            <h3>Penaklukan Surabaya dan Madura(1620-1625)</h3>
-                            <p>Penaklukan terhadap kota Surabaya dilakukan selama bertahun-tahun. Serangan-serangan dan dan strategi
-                                perang dilakukan oleh Sultan Agung dan pasukannya untuk menaklukan Surabaya.</p>
-                            <p>Penaklukan terhadap kota Surabaya dilakukan selama bertahun-tahun. Serangan-serangan dan dan strategi
-                                perang dilakukan oleh Sultan Agung dan pasukannya untuk menaklukan Surabaya.</p>
-                        </section>-->
-                        <!--Masa Perpecahan dan Keruntuhan Mataram-->
                         <a class="anchor" id="10"></a>
                         <section id='Pasca Sultan Agung'>
                             <h3>Pasca Kekuasaan Sultan Agung</h3>
@@ -414,7 +384,6 @@
         $('.anchor').css('top', -1*(tinggi+15))
         L.mapbox.accessToken = 'pk.eyJ1Ijoic2hlaWxhYW1hbGlhODUiLCJhIjoiY2lvc3ZxNjh0MDA5cHR6bTU1cXpzYmk3aiJ9.yVjBky9lBppz577igiSl4g';
 
-        // Replace 'mapbox.streets' with your map id.
         var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/sheilaamalia85.0c9908a6/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
             attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         });
@@ -467,7 +436,7 @@
                     properties: {id: "Perjalanan Ki Ageng Pemanahan", title: 'Alas Mentaok', zoom: 10}, type: 'Feature'
                 },
 
-
+                //Masa Kekuasaan Panembahan Senopati
                 {
                     geometry: {type: "Point", coordinates: [110.4917533444782, -7.755077591137338]},
                     properties: {id: "Panembahan Senopati", zoom: 9}, type: 'Feature'
@@ -564,7 +533,6 @@
             })
         })
 
-
         var coords = []
         L.geoJson(perjalanan, {
             style: function (feature) {
@@ -576,18 +544,6 @@
             }
         })
 
-      /*  var coords2 = []
-        L.geoJson(perjalanan3, {
-            style: function (feature) {
-                return {color: feature.properties.color};
-            },
-            onEachFeature: function (feature, layer) {
-                console.log(feature.geometry.coordinates);
-                coords.push({lat:feature.geometry.coordinates[1],lng:feature.geometry.coordinates[0]})
-            }
-        })
-
-*/
         function setId(newId) {
 
             if (newId === currentId) return;
@@ -595,8 +551,7 @@
             placesLayer.eachLayer(function (layer) {
                 if (layer.feature.properties.id === newId) {
                     layer.setIcon(L.mapbox.marker.icon({
-                        'marker-color': '#99d8c9',
-                        'marker-symbol': '1',
+                        'marker-color': '#99d8c9'
                     }));
                     var content = '<h2>'+ layer.feature.properties.title+'<\/h2>' + '<img src="'+ layer.feature.properties.image+'" alt="">'+layer.feature.properties.description;
                     layer.addTo(map).bindPopup(content);
@@ -620,43 +575,31 @@
                 polyline1.addTo(map);
                 var j = 0;
                 var track = [];
-                // Create a marker and add it to the map.
+
                 jalan.addTo(map);
 //                getPoint([polyline1._latlngs[0].lat,polyline1._latlngs[0].lng],[polyline1._latlngs[1].lat,polyline1._latlngs[1].lng], 0.001);
 
                 tick();
                 function tick() {
-                    // Set the marker to be at the same point as one
-                    // of the segments or the line.
                     jalan.setLatLng(L.latLng(
                             coords[j].lat,
                             coords[j].lng));
-
-                    // Move to the next point of the line
-                    // until `j` reaches the length of the array.
                     if (++j < coords.length) setTimeout(tick, 100);
                 }
         }
             else if (newId == "Pasca Sultan Agung") {
                 polyline2.addTo(map);
-                var j = 0;
+                /*var j = 0;
                 var track = [];
-                // Create a marker and add it to the map.
                 jalan2.addTo(map);
 //                getPoint([polyline1._latlngs[0].lat,polyline1._latlngs[0].lng],[polyline1._latlngs[1].lat,polyline1._latlngs[1].lng], 0.001);
-
                 tick();
                 function tick() {
-                    // Set the marker to be at the same point as one
-                    // of the segments or the line.
                     jalan2.setLatLng(L.latLng(
                             coords[j].lat,
                             coords[j].lng));
-
-                    // Move to the next point of the line
-                    // until `j` reaches the length of the array.
                     if (++j < coords.length) setTimeout(tick, 100);
-                }
+                }*/
             }
             else {
                 map.removeLayer(poligon);
@@ -675,14 +618,10 @@
                 }
             }
 
-            // fungsi untuk highlight section yg sedang aktif (current section)
             for (var i = 0; i < sections.length; i++) {
                 sections[i].className = sections[i].id === newId ? 'active' : '';
             }
-
-            // set id yang sedang aktif sebagai current id
             currentId = newId;
-
         }
 
         var narasi = document.getElementById("narasi");
@@ -701,7 +640,6 @@
         var legend = L.control({position: 'bottomright'});
 
         legend.onAdd = function (map) {
-
             var div = L.DomUtil.create('div', 'info legend')
             div.innerHTML += '<h2>Legenda</h2>'
             div.innerHTML += '<li><img src="http://a.tiles.mapbox.com/v4/marker/pin-m+99d8c9.png?access_token=pk.eyJ1Ijoic2hlaWxhYW1hbGlhIiwiYSI6IkNiTmdlQ1kifQ.AQMh0TeJoFX1TyKDObxvxw" /><span class="right">Titik lokasi<span></li>'
@@ -709,9 +647,7 @@
             div.innerHTML += '<li><img src="https://s31.postimg.org/hdofmgpwb/Capture1.jpg" width="40px" height="30px"/><span class="right">Rute perjalanan<span></li>'
             return div;
         };
-
         legend.addTo(map);
-
     </script>
 </body>
 </html>
